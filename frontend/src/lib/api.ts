@@ -4,8 +4,7 @@
  */
 
 /** Base URL for the API, configured via environment variable. */
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 /** Input fields for a price prediction request. */
 export interface PredictionInput {
