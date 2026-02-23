@@ -175,6 +175,16 @@ def format_inr(amount: float) -> str:
 # ── API Endpoints ────────────────────────────────────────────────────────────
 
 
+@app.get("/")
+async def root():
+    """Root endpoint returning API status and links to documentation."""
+    return {
+        "message": "Welcome to Navi Mumbai House Price Predictor API",
+        "docs_url": "/docs",
+        "health_check": "/api/health"
+    }
+
+
 @app.get("/api/health", response_model=HealthResponse)
 async def health_check() -> HealthResponse:
     """Health check endpoint for monitoring and readiness probes."""
