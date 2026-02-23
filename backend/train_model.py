@@ -177,9 +177,19 @@ def main() -> None:
     """Main entry point for model training."""
     # Locate the CSV dataset.
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(
-        script_dir, "..", "navi_mumbai_real_estate_uncleaned_2500_cleaned.csv"
-    )
+    
+    # Try looking in the current directory (Docker environment)
+    docker_csv_path = os.path.join(script_dir, "navi_mumbai_real_estate_uncleaned_2500_cleaned.csv")
+    # Try looking in the parent directory (local development)
+    local_csv_path = os.path.join(script_dir, "..", "navi_mumbai_real_estate_uncleaned_2500_cleaned.csv")
+    
+    if os.path.exists(docker_csv_path):
+        csv_path = docker_csv_path
+    elif os.path.exists(local_csv_path):
+        csv_path = local_csv_path
+    else:
+        print(f"Error: Dataset not found. Checked {docker_csv_path} and {local_csv_path}")
+        sys.exit(1)
 
     if not os.path.exists(csv_path):
         print(f"Error: Dataset not found at {csv_path}")

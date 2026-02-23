@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code and dataset.
 COPY . .
-COPY ../navi_mumbai_real_estate_uncleaned_2500_cleaned.csv ./data/
+COPY navi_mumbai_real_estate_uncleaned_2500_cleaned.csv .
 
 # Train the model at build time.
 RUN python train_model.py
